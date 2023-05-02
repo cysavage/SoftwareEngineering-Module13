@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.mycompany.mvvmexample.FirestoreContext;
 import java.io.IOException;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,7 +25,7 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
         fstore = contxtFirebase.firebase();
         fauth = FirebaseAuth.getInstance();
-        scene = new Scene(loadFXML("AccessFBView.fxml"));
+        scene = new Scene(loadFXML("signin.fxml"));
         primaryStage.setScene(scene);
         primaryStage.show();
 

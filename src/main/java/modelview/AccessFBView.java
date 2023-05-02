@@ -11,6 +11,7 @@ import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
+import com.google.firebase.auth.UserRecord.CreateRequest;
 import com.mycompany.mvvmexample.FirestoreContext;
 import com.mycompany.mvvmexample.FirestoreContext;
 import com.mycompany.mvvmexample.FirestoreContext;
@@ -35,9 +36,8 @@ import javafx.scene.control.TextField;
 import models.Person;
 
 public class AccessFBView {
-
  
-     @FXML
+    @FXML
     private TextField nameField;
     @FXML
     private TextField majorField;
@@ -96,9 +96,8 @@ public class AccessFBView {
         ApiFuture<WriteResult> result = docRef.set(data);
     }
     
-        public boolean readFirebase()
-         {
-             key = false;
+    public boolean readFirebase() {
+        key = false;
 
         //asynchronously retrieve all documents
         ApiFuture<QuerySnapshot> future =  App.fstore.collection("References").get();
@@ -136,27 +135,26 @@ public class AccessFBView {
         return key;
     }
         
-        public void sendVerificationEmail() {
+    public void sendVerificationEmail() {
         try {
             UserRecord user = App.fauth.getUser("name");
             //String url = user.getPassword();
 
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
     }
 
     public boolean registerUser() {
-        UserRecord.CreateRequest request = new UserRecord.CreateRequest()
-                .setEmail("user@example.com")
+        
+        CreateRequest request = new UserRecord.CreateRequest()
+                .setEmail("hello@example.com")
                 .setEmailVerified(false)
                 .setPassword("secretPassword")
-                .setPhoneNumber("+11234567890")
-                .setDisplayName("John Doe")
+                .setPhoneNumber("+11234567888")
+                .setDisplayName("Joe Doe")
                 .setDisabled(false);
-
-        UserRecord userRecord;
+        
         try {
-            userRecord = App.fauth.createUser(request);
+            UserRecord userRecord = App.fauth.createUser(request);
             System.out.println("Successfully created new user: " + userRecord.getUid());
             return true;
 
